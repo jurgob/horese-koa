@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "bin":{
+    "horese-koa-server": "./server.js"
+  },
+  "author": "Jurgo Boemo",
+  "homepage": "https://github.com/jurgob/horese-koa",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.10.4",
