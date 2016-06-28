@@ -5,7 +5,7 @@ Rise a koa server with hot reloading in dev env, with no conf!
 ## how to build a react project from scratch, with no conf!
 
 
-### create an npm project
+### create an npm project (be sure your node version is 5+)
 
 ```bash
  mkdir my_project
