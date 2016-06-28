@@ -8,18 +8,21 @@ Rise a koa server with hot reloading in dev env, with no conf!
 ### create an npm project
 
 ```bash
- mkdir myProject
- cd myProject
+ mkdir my_project
+ cd my_project
  npm init
  ```
  
-### install this plugin and React
+### install horese-koa...
  ```bash
- npm i --save react
- npm i --save react-dom
  npm i --save horese-koa
  ```
  
+ ### ... and React
+```bash
+ npm i --save react react-dom
+```
+  
 ### create your first project
  add 2 file "src/index.js and "src/app.js"
  
