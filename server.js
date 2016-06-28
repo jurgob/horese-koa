@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 const horese_koa = require('./index');
 let app = horese_koa()
