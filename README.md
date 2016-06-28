@@ -88,10 +88,13 @@ that's it! you will have your react project with hotreloading running!. no webpa
 
 
  
- ##future expansion
+##future expansion
  
- write some examples adding 
- if user have webpack.
+- do build command horese-koa-build
+- if user have webpack in his dir, use that config
+- if user have public in his dir, use that dir for static asset
+- add some basig conf to the server (change static dir, change entrypoing, multi entrypoint, change )
+- write some examples adding some api management with koa
  
  
  
