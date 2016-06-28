@@ -22,6 +22,9 @@
     "event-source-polyfill": "0.0.7",
     "eventsource-polyfill": "^0.9.6",
     "jsx-control-statements": "^3.1.2",
+    "koa": "^1.2.0",
+    "koa-router": "^5.4.0",
+    "koa-static": "^2.0.0",
     "koa-webpack-dev-middleware": "^1.2.1",
     "koa-webpack-hot-middleware": "^1.0.3",
     "webpack": "^1.13.1"
