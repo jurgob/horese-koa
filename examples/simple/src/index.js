@@ -1,1 +1,7 @@
-console.log('test');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app'
+ReactDOM.render(
+    (<App />),
+    document.getElementById('react_body')
+);

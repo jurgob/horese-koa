@@ -33,6 +33,7 @@ const horese_koa = () => {
           <script type="text/javascript" src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
         </head>
         <body>
+          <div id="react_body" ></div>
           <script src="/static/bundle.js"></script>
         </body>
       </html>
@@ -48,7 +49,7 @@ const horese_koa = () => {
 
 
   //dev env
-  if(process.env.NODE_ENV !== 'production' ) {
+  // if(process.env.NODE_ENV !== 'production' ) {
     console.log('Enable hot reload')
     const webpack = require('webpack');
 
@@ -66,7 +67,7 @@ const horese_koa = () => {
     }));
 
     app.use(require("koa-webpack-hot-middleware")(webpackCompiler));
-  }
+  // }
 
 
   console.log('**** app', app)
