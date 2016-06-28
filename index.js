@@ -21,7 +21,25 @@ const horese_koa = () => {
 
   const DIR = process.cwd()
   console.log('DIR', DIR);
+
   app.use(serve(DIR + '/public'));
+
+  api.get('/', function *(){
+    this.body =`
+      <html>
+        <head>
+          <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1">
+          <title>Horese Koa Simple test</title>
+          <script type="text/javascript" src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
+        </head>
+        <body>
+          <script src="/static/bundle.js"></script>
+        </body>
+      </html>
+    `
+  })
+
+
 
   app
     .use(api.routes())
