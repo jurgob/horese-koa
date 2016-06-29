@@ -3,29 +3,24 @@
 const app = require('koa')();
 let serve = require('koa-static');
 const router = require('koa-router');
-const fs = require('fs');
-
+// const fs = require('fs');
+import  fs from 'fs';
+import React from 'react'
 console.log('listening on port ');
-
-
+import ReactDOMServer from 'react-dom/server'
 
 const horese_koa = () => {
-//set vars
-  // const PORT = process.env.PORT || 3333
-
 //routing
-  let api = router();
-
-  console.log('__filename', __filename);
-  console.log('__dirname', __dirname);
-
   const DIR = process.cwd()
-  const APP_DIR = __dirname;
-  console.log('DIR', DIR);
+  const HORESE_DIR = __dirname;
 
   app.use(serve(DIR + '/public'));
 
+  let api = router();
   api.get('/', function *(){
+    const App = require(DIR+'/src/app.js').default
+    const html_body = ReactDOMServer.renderToString(<App />);
+
     this.body =`
       <html>
         <head>
@@ -34,7 +29,9 @@ const horese_koa = () => {
           <script type="text/javascript" src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
         </head>
         <body>
-          <div id="horese_body" ></div>
+          <div id="horese_body" >
+            ${html_body}
+          </div>
           <script src="/static/bundle.js"></script>
         </body>
       </html>
@@ -47,8 +44,6 @@ const horese_koa = () => {
     .use(api.routes())
     .use(api.allowedMethods());
 
-
-
   //dev env
   if(process.env.NODE_ENV !== 'production' ) {
     console.log('Enable hot reload')
@@ -56,7 +51,7 @@ const horese_koa = () => {
 
     console.log('it exist! '+DIR,fs.existsSync(DIR+'/webpack.config.js'))
 
-    const webpackConfig = fs.existsSync(DIR+'/webpack.config.js') ? require(DIR+'/webpack.config.js') :  require('./confs/webpack.config.js')(DIR, APP_DIR);
+    const webpackConfig = fs.existsSync(DIR+'/webpack.config.js') ? require(DIR+'/webpack.config.js') :  require('./confs/webpack.config.js')(DIR, HORESE_DIR);
     const webpackCompiler = webpack(webpackConfig);
     const webpackDev = require("koa-webpack-dev-middleware");
 
@@ -69,6 +64,13 @@ const horese_koa = () => {
 
     app.use(require("koa-webpack-hot-middleware")(webpackCompiler));
   }
+
+
+
+
+
+
+
 
   console.log('EXISTS: '+DIR+'/server.js')
 
