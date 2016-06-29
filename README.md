@@ -4,8 +4,16 @@ Rise a koa server with hot reloading in dev env, with no conf!
 
 ## how to build a react project from scratch, with no conf!
 
+###why I did this?
+a lot of react new-be get stuck because they have to learn and configure tools like webpack and babel. This project offer them a fast kickstart, but it is not a boilerplate project!.
 
-### create an npm project
+The cool part is that you can easily generate/deploy your SPA (client and server side)  and improve the server part using koa.
+
+If you want, you can then decide to manage webpack / babel in the standard way.
+
+
+
+### create an npm project (be sure your node version is 5+)
 
 ```bash
  mkdir my_project
@@ -24,7 +32,7 @@ Rise a koa server with hot reloading in dev env, with no conf!
 ```
 
 ### create your first project
- add 2 file "src/index.js and "src/app.js"
+ add  file "src/app.js"
 
  ```bash
  mkdir src
@@ -59,3 +67,13 @@ npm run dev
 ```
 
 that's it! you will have your react project with hotreloading running!. no webpack or babel config!
+
+
+
+##future expansion
+
+- do build command horese-koa-build
+- if user have webpack in his dir, use that config
+- if user have public in his dir, use that dir for static asset
+- add some basig conf to the server (change static dir, change entrypoing, multi entrypoint, change )
+- write some examples adding some api management with koa
