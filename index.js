@@ -49,7 +49,7 @@ const horese_koa = () => {
 
 
   //dev env
-  // if(process.env.NODE_ENV !== 'production' ) {
+  if(process.env.NODE_ENV !== 'production' ) {
     console.log('Enable hot reload')
     const webpack = require('webpack');
 
@@ -67,7 +67,17 @@ const horese_koa = () => {
     }));
 
     app.use(require("koa-webpack-hot-middleware")(webpackCompiler));
-  // }
+  }
+
+  console.log('EXISTS: '+DIR+'/server.js')
+
+  if(fs.existsSync(DIR+'/src/server.js')){
+    console.log('SERVER MANAGED');
+    require(DIR+'/src/server.js')(app);
+
+  }else{
+    console.log('SERVER NOT MANAGED')
+  }
 
 
   console.log('**** app', app)
@@ -76,16 +86,6 @@ const horese_koa = () => {
 
 }
 
+
+
 module.exports = horese_koa
-// let api2 = router();
-//
-// api2.get('/text', function *(){
-//   this.body = {test:"Hello world"}
-// })
-//
-// app
-//   .use(api2.routes())
-//   .use(api2.allowedMethods())
-//
-// //listen
-// app.listen(PORT);
