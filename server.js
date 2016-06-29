@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 'use strict';
-const horese_koa = require('./index');
-// import horese_koa from './index';
-
-let app = horese_koa()
-
-const PORT = process.env.PORT || 3333
-app.listen(PORT);
-console.log('listening on port '+PORT);
+console.log('TEST')
+if(process.env.ENV === 'production'){
+  require('./server_prod')
+}
+else{
+  console.log('NODEMON!!');
+  console.log(require('./server_dev'))
+  require('./server_dev')
+}

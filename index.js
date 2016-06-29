@@ -6,7 +6,7 @@ const router = require('koa-router');
 // const fs = require('fs');
 import  fs from 'fs';
 import React from 'react'
-console.log('listening on port ');
+
 import ReactDOMServer from 'react-dom/server'
 
 const horese_koa = () => {
@@ -29,9 +29,7 @@ const horese_koa = () => {
           <script type="text/javascript" src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
         </head>
         <body>
-          <div id="horese_body" >
-            ${html_body}
-          </div>
+          <div id="horese_body" >${html_body}</div>
           <script src="/static/bundle.js"></script>
         </body>
       </html>
