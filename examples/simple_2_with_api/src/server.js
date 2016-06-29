@@ -10,9 +10,6 @@ module.exports = (app) => {
     .use(api2.routes())
     .use(api2.allowedMethods())
 
-
-
   return app
-
 
 }

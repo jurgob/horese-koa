@@ -20,6 +20,7 @@ const horese_koa = () => {
   console.log('__dirname', __dirname);
 
   const DIR = process.cwd()
+  const APP_DIR = __dirname;
   console.log('DIR', DIR);
 
   app.use(serve(DIR + '/public'));
@@ -33,7 +34,7 @@ const horese_koa = () => {
           <script type="text/javascript" src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
         </head>
         <body>
-          <div id="react_body" ></div>
+          <div id="horese_body" ></div>
           <script src="/static/bundle.js"></script>
         </body>
       </html>
@@ -55,7 +56,7 @@ const horese_koa = () => {
 
     console.log('it exist! '+DIR,fs.existsSync(DIR+'/webpack.config.js'))
 
-    const webpackConfig = fs.existsSync(DIR+'/webpack.config.js') ? require(DIR+'/webpack.config.js') :  require('./confs/webpack.config.js')(DIR);
+    const webpackConfig = fs.existsSync(DIR+'/webpack.config.js') ? require(DIR+'/webpack.config.js') :  require('./confs/webpack.config.js')(DIR, APP_DIR);
     const webpackCompiler = webpack(webpackConfig);
     const webpackDev = require("koa-webpack-dev-middleware");
 

@@ -4,11 +4,16 @@ let path = require('path');
 let webpack = require('webpack');
 let babelConf = require('./babelrc')
 
-module.exports = (dir) => ({
+module.exports = (dir, app_dir) => ({
+  resolve: {
+    root: [
+      path.resolve(dir+'/src'),
+    ]
+  },
   entry: [
     'eventsource-polyfill',           // necessary for hot reloading with IE
     'webpack-hot-middleware/client',
-    dir+'/src/index.js'
+    (app_dir+'/confs/client/index.js')
   ],
 
   output: {
@@ -28,6 +33,12 @@ module.exports = (dir) => ({
         test: /\.js?|\.jsx?$/,
         loader: 'babel',
         include: path.join(dir, 'src'),
+        query:babelConf
+      },
+      {
+        test: /\.js?|\.jsx?$/,
+        loader: 'babel',
+        include: path.join(app_dir, 'confs/client'),
         query:babelConf
       }
     ]
