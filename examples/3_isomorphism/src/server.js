@@ -1,4 +1,4 @@
-module.exports = (app) => {
+export default (app) => {
   const router = require('koa-router');
   let api2 = router();
 

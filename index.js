@@ -74,7 +74,7 @@ const horese_koa = () => {
 
   if(fs.existsSync(DIR+'/src/server.js')){
     console.log('SERVER MANAGED');
-    require(DIR+'/src/server.js')(app);
+    require(DIR+'/src/server.js').default(app);
 
   }else{
     console.log('SERVER NOT MANAGED')

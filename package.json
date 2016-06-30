@@ -34,5 +34,8 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "webpack": "^1.13.1"
+  },
+  "devDependencies": {
+    "isomorphic-fetch": "^2.2.1"
   }
 }
