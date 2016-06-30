@@ -22,7 +22,7 @@ const horese_koa = () => {
     const prefetched = yield app.horese.prefech()
     const initial_state = JSON.stringify(prefetched);
 
-    const App = require(DIR+'/src/app.js').default
+    const App = require(DIR+'/src/index.js').default
     const html_body = ReactDOMServer.renderToString(App(prefetched));
 
     this.body =`
@@ -76,12 +76,11 @@ const horese_koa = () => {
   }
 
 
-
-  console.log('EXISTS: '+DIR+'/server.js')
-
-  if(fs.existsSync(DIR+'/src/server.js')){
+  const SERVER_MAIN_FILE = DIR+'/src_server/index.js'
+  console.log('EXISTS: '+SERVER_MAIN_FILE)
+  if(fs.existsSync(SERVER_MAIN_FILE)){
     console.log('SERVER MANAGED');
-    require(DIR+'/src/server.js').default(app);
+    require(SERVER_MAIN_FILE).default(app);
 
   }else{
     console.log('SERVER NOT MANAGED')

@@ -6,7 +6,7 @@ const DIR = process.cwd()
 nodemon({
   script: HORESE_DIR+"/server_prod.js",
   exec:  HORESE_DIR+"/node_modules/.bin/babel-node",
-  ignoreRoot: DIR+"/src/app"
+  ignoreRoot: DIR+"/src/"
 })
 
 // module.exports = function(){

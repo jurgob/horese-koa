@@ -9,7 +9,8 @@
     "ex1": "cd examples/1_simple; node ../../server.js",
     "ex2": "cd examples/2_with_api; node ../../server.js",
     "ex3": "cd examples/3_isomorphism; node ../../server.js",
-    "ex4": "cd examples/4_isomorphism_with_prefetch; node ../../server.js"
+    "ex4": "cd examples/4_isomorphism_with_prefetch; node ../../server.js",
+    "ex5": "cd examples/5_react_router; node ../../server.js"
   },
   "bin": {
     "horese-koa-server": "./server.js"
@@ -40,6 +41,7 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "react-router": "^2.5.1"
   }
 }
