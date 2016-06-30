@@ -47,7 +47,7 @@ If you want, you can then decide to manage webpack / babel in the standard way.
  import React from 'react';
 
  const App = () => <div>React Super Simple example with hot reloading and error catch</div>
- export default App;
+ export default () => <App />
  ```
 
 
