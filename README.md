@@ -32,17 +32,17 @@ If you want, you can then decide to manage webpack / babel in the standard way.
 ```
 
 ### create your first project
- add  file "src/app.js"
+ add  file "src/index.js"
 
  ```bash
  mkdir src
- touch src/app.js
+ touch src/index.js
  ```
 
  this is the file contents:
 
 
- src/app.js
+ src/index.js
  ```
  import React from 'react';
 
