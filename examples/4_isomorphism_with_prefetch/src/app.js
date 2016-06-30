@@ -6,11 +6,10 @@ const jsonize = res => res.json()
 class App extends React.Component {
   render(){
     const {redditRes} = this.props
-    console.log('App render: ',this.props)
 
     return (
       <div>
-        <h1>Reddit Feeds</h1>
+        <h1>Reddit Feeds Simple</h1>
         {redditRes && redditRes.data
         ? <FeedList feeds={redditRes.data.children} />
         : <LoadingFeeds />}
@@ -37,10 +36,6 @@ const Feed = ({feed}) => {
 
 const LoadingFeeds = () => <div>Loading...</div>
 
-// const horese_func = (initial_state) =>
-
-
 export default function (initial_state){
-  console.log('££££ calcinitial_state: ',typeof(initial_state))
   return (<App redditRes={initial_state.redditRes} />)
 }
