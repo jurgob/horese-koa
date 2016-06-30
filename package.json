@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./server.js --exec babel-node"
+    "dev": "nodemon ./server.js --exec babel-node",
+    "ex1": "cd examples/1_simple; node ../../server.js",
+    "ex2": "cd examples/2_with_api; node ../../server.js",
+    "ex3": "cd examples/3_isomorphism; node ../../server.js",
+    "ex4": "cd examples/4_isomorphism_with_prefetch; node ../../server.js"
   },
   "bin": {
     "horese-koa-server": "./server.js"
