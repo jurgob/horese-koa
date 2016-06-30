@@ -4,7 +4,7 @@ import App from 'app'
 
 class AppHorese extends React.Component {
   render(){
-    return <App />
+    return App(window.horese.initial_state)
   }
 }
 

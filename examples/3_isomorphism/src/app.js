@@ -52,4 +52,4 @@ const Feed = ({feed}) => {
 const LoadingFeeds = () => <div>Loading...</div>
 
 
-export default App
+export default () => <App />

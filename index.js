@@ -18,9 +18,16 @@ const horese_koa = () => {
 
   let api = router();
   api.get('/', function *(){
-    const App = require(DIR+'/src/app.js').default
-    const html_body = ReactDOMServer.renderToString(<App />);
 
+    const prefetched = yield app.horese.prefech()
+    const initial_state = JSON.stringify(prefetched);
+
+    const App = require(DIR+'/src/app.js').default
+    console.log('***!! App ',App(prefetched))
+
+    const html_body = ReactDOMServer.renderToString(App(prefetched));
+
+    console.log('app.horese.prefetch', app.horese.prefech);
     this.body =`
       <html>
         <head>
@@ -30,6 +37,11 @@ const horese_koa = () => {
         </head>
         <body>
           <div id="horese_body" >${html_body}</div>
+          <script >
+            window.horese = {
+              initial_state: ${initial_state}
+            }
+          </script>
           <script src="/static/bundle.js"></script>
         </body>
       </html>
@@ -61,6 +73,9 @@ const horese_koa = () => {
     }));
 
     app.use(require("koa-webpack-hot-middleware")(webpackCompiler));
+
+    app.horese = {}
+    app.horese.prefech = () => ({})
   }
 
 
