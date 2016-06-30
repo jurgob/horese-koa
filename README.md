@@ -1,5 +1,5 @@
 # horese-koa
-Rise a koa server with hot reloading in dev env, with no conf!
+Rise a koa server with hot reloading in dev env, with no conf! Server Side Rendering comes for free!
 
 
 ## how to build a react project from scratch, with no conf!
@@ -26,7 +26,7 @@ If you want, you can then decide to manage webpack / babel in the standard way.
  npm i --save horese-koa
  ```
 
- ### ... and React
+### ... and React
 ```bash
  npm i --save react react-dom
 ```
