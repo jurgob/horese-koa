@@ -3,7 +3,7 @@ export default  (app) => {
   let api2 = router();
 
   api2.get('/api', function *(){
-    this.body = {test:"Hello world"}
+    this.body = {test:"Hello world!!"}
   })
 
   app
