@@ -9,42 +9,80 @@ import React from 'react'
 
 import ReactDOMServer from 'react-dom/server'
 
+const buildBody = (page_title, html_body, initial_state) => `
+  <html>
+    <head>
+      <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1">
+      <title>${page_title}</title>
+      <script type="text/javascript" src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
+    </head>
+    <body>
+      <div id="horese_body" >${html_body}</div>
+      <script >
+        window.horese = {
+          initial_state: ${JSON.stringify(initial_state)}
+        }
+      </script>
+      <script src="/static/bundle.js"></script>
+    </body>
+  </html>
+`
+
+
+
+
 const horese_koa = () => {
 //routing
   const DIR = process.cwd()
   const HORESE_DIR = __dirname;
 
-  app.use(serve(DIR + '/public'));
+  const defaultPrerender = (app, initial_state, buildBody) => {
+    const App = require(DIR+'/src/index.js').default
+    const html_body = ReactDOMServer.renderToString(App(initial_state));
+    app.body = buildBody("",html_body, initial_state)
+  }
+
+
+  // app.use(serve(DIR + '/public'));
+
+  app.horese = {}
+  app.horese.prefech = () => ({})
+  const SERVER_MAIN_FILE = DIR+'/src_server/index.js'
+  console.log('EXISTS: '+SERVER_MAIN_FILE)
+  if(fs.existsSync(SERVER_MAIN_FILE)){
+    console.log('SERVER MANAGED');
+    require(SERVER_MAIN_FILE).default(app);
+  }else{
+    console.log('SERVER NOT MANAGED')
+  }
 
   let api = router();
-  api.get('/', function *(){
+  // api.get('/static/bundle.js', function *(){
+  //   console.log('STATIC IGNORE')
+  // })
 
-    const prefetched = yield app.horese.prefech()
-    const initial_state = JSON.stringify(prefetched);
+  api.get('*', function *(next){
+    // const app = this;
+    console.log('URL: ',this.url)
+    if(this.url.indexOf('/static') !== -1 || this.url.indexOf('/__webpack_hmr') !== -1  ){
+      console.log('IGNORE STATIC PATHS')
+      yield next; ;
+    }
+    else{
+      const initial_state = yield app.horese.prefech()
+      if(typeof(app.horese.prerender) === 'function'){
+        console.log('CUSTOM PRERENDER')
+        app.horese.prerender(this, initial_state, buildBody);
+      }
+      else{
+        console.log('DEFAULT PRERENDER')
+        defaultPrerender(this, initial_state, buildBody)
+      }
+    }
 
-    const App = require(DIR+'/src/index.js').default
-    const html_body = ReactDOMServer.renderToString(App(prefetched));
 
-    this.body =`
-      <html>
-        <head>
-          <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1">
-          <title>Horese Koa Simple test</title>
-          <script type="text/javascript" src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
-        </head>
-        <body>
-          <div id="horese_body" >${html_body}</div>
-          <script >
-            window.horese = {
-              initial_state: ${initial_state}
-            }
-          </script>
-          <script src="/static/bundle.js"></script>
-        </body>
-      </html>
-    `
+
   })
-
 
 
   app
@@ -71,20 +109,11 @@ const horese_koa = () => {
 
     app.use(require("koa-webpack-hot-middleware")(webpackCompiler));
 
-    app.horese = {}
-    app.horese.prefech = () => ({})
+
   }
 
 
-  const SERVER_MAIN_FILE = DIR+'/src_server/index.js'
-  console.log('EXISTS: '+SERVER_MAIN_FILE)
-  if(fs.existsSync(SERVER_MAIN_FILE)){
-    console.log('SERVER MANAGED');
-    require(SERVER_MAIN_FILE).default(app);
 
-  }else{
-    console.log('SERVER NOT MANAGED')
-  }
 
   return app
 
