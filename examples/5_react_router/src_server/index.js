@@ -29,11 +29,9 @@ export default (app) => {
     }
   }
 
-
-
-
   app.horese.prerender = function (app, initial_state, buildBody){
     match({ routes, location: app.url }, (error, redirectLocation, renderProps) => {
+      console.log('app', app)
      if (error) {
        app.status=500
        app.message = error.message
@@ -41,16 +39,12 @@ export default (app) => {
        app.status=302
        app.redirect(redirectLocation.pathname + redirectLocation.search)
      } else if (renderProps) {
-       // You can also check renderProps.components or renderProps.routes for
-       // your "not found" component or route respectively, and send a 404 as
-       // below, if you're using a catch-all route.
-      //  const html_body = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      //  buildBody("",html_body, initial_state)
       const html_body = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      app.body = buildBody("",html_body, initial_state)
+      app.body = buildBody("Example 5",html_body, initial_state)
 
      } else {
-       app.status(404).send('Not found')
+       app.status =404
+       app.message='Not found'
      }
    })
 
